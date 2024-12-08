@@ -21,6 +21,8 @@ def varidate():
             if len(sys.argv) != 4:
                 errorMessage("Incorrect number of arguments. duplicate-contents is 4")
 
+            duplicateContents()
+
         case "replace-string":
             if len(sys.argv) != 5:
                 errorMessage("Incorrect number of arguments. replace-string is 5")
@@ -50,6 +52,17 @@ def copyFile():
         with open(outputpath, 'wb') as f_outputpath:
             f_outputpath.write(f_input.read())
 
+def duplicateContents():
+    inputpath = sys.argv[2]
+    count = sys.argv[3]
+    count = int(count)
 
+    with open(inputpath, 'r') as f:
+        content = f.read()
+    
+    with open(inputpath, 'a') as f:
+        for i in range(count):
+            f.write(content)
+            
 if __name__=="__main__":
     varidate()
