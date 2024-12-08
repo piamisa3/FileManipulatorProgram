@@ -1,17 +1,21 @@
 import sys
+import shutil
 
 # Varidate
 def varidate():
+    print(sys.argv)
     match sys.argv[1]:
         case "reverse":
             if len(sys.argv) != 4:
                 errorMessage("Incorrect number of arguments. reverse is 4")
+
             reverseString()
 
         case "copy":
             if len(sys.argv) != 4:
                 errorMessage("Incorrect number of arguments. copy is 4")
-                copyFile()
+
+            copyFile()
 
         case "duplicate-contents":
             if len(sys.argv) != 4:
@@ -37,6 +41,14 @@ def reverseString():
     reverse_contents = contents[::-1]
     with open(outputpath, 'w') as f:
         f.write(reverse_contents)
+
+def copyFile():
+    inputpath = sys.argv[2]
+    outputpath = sys.argv[3]
+
+    with open(inputpath, 'rb') as f_input:
+        with open(outputpath, 'wb') as f_outputpath:
+            f_outputpath.write(f_input.read())
 
 
 if __name__=="__main__":
